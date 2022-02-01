@@ -6,15 +6,13 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import axios from "axios";
-import { APIkey } from "../../utils/constantes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //Interfaces
 type props = {
   children: ReactNode;
 };
-import { ICidades } from "../interfaces/cidades";
-import { ICidadesSearch } from "../interfaces/cidadeSearch";
+import { ICidadesSearch } from "../interfaces/cidadeSearch.interface";
 
 type IFavoritesContext = {
   favList: ICidadesSearch[] | null;
@@ -27,8 +25,28 @@ export const FavoritesContext = createContext({} as IFavoritesContext);
 export default function FavoritesProvider({ children }: props) {
   const [favList, setFavlist] = useState<ICidadesSearch[] | null>(null);
 
-  //Busca as cordenadas da cidade
-  useEffect(() => {}, [favList]);
+  //Salva a lista de favoritos no async storage
+  useEffect(() => {
+    !!favList &&
+      (async () => {
+        const jsonValue = JSON.stringify(favList);
+        await AsyncStorage.setItem("@Sparta_FavList", jsonValue).then(() =>
+          console.log("Salvo no storage")
+        );
+      })();
+  }, [favList]);
+
+  //Retorna a lista salva em memoria
+  useEffect(() => {
+    (async () => {
+      const jsonValue = await AsyncStorage.getItem("@Sparta_FavList");
+
+      if (!!jsonValue) {
+        setFavlist(JSON.parse(jsonValue));
+        console.log("Lista Carregada");
+      }
+    })();
+  }, []);
 
   return (
     <FavoritesContext.Provider

@@ -13,8 +13,8 @@ import { APIkey } from "../../utils/constantes";
 type props = {
   children: ReactNode;
 };
-import { ICidades } from "../interfaces/cidades";
-import { ICidadesSearch } from "../interfaces/cidadeSearch";
+import { ICidades } from "../interfaces/cidades.interface";
+import { ICidadesSearch } from "../interfaces/cidadeSearch.interface";
 
 type ISearchContex = {
   searchQuery: string;
@@ -42,8 +42,6 @@ export default function SearchProvider({ children }: props) {
             `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=4&appid=${APIkey}`
           )
           .then((response) => {
-            console.log(response.data);
-
             setSearchCidade(response.data);
           })
       : setSearchCidade(null);

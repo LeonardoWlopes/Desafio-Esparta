@@ -4,4 +4,5 @@ export type ICidadesSearch = {
   lon: -47.6053774;
   name: "Serrana";
   state: "São Paulo";
+  id: string;
 };

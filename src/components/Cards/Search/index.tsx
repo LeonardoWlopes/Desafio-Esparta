@@ -1,24 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect, memo } from "react";
 import * as S from "./styles";
+
+//context
+import { FavoritesContext } from "../../../contexts/FavoritesContext";
+import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
 type props = {
-  nome: string;
-  estado: string;
-  pais: string;
+  cidade: ICidadesSearch;
 };
+import { ICidadesSearch } from "../../../interfaces/cidadeSearch.interface";
 
-export default function CardSearch({ nome, estado, pais }: props) {
+function CardSearch({ cidade }: props) {
+  const { favList, setFavlist } = useContext(FavoritesContext);
+  const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
+
+  function addCityToFavotites() {
+    const alreadyExists = favList?.findIndex((item) => item.lat === cidade.lat);
+
+    if (!!favList) {
+      const newCarrinho = [...favList, cidade];
+
+      alreadyExists == -1 && setFavlist(newCarrinho);
+    } else {
+      setFavlist([cidade]);
+    }
+
+    setSearchQuery("");
+    setIsSearchVisible(false);
+  }
+
   return (
     <S.Container>
       <S.Name>
-        {nome}, {estado}
+        {cidade.name}, {cidade.state}
       </S.Name>
-      <S.Estado>{pais}</S.Estado>
+      <S.Estado>{cidade.country}</S.Estado>
 
-      <S.Button onPress={()=> {}} >
+      <S.Button onPress={addCityToFavotites}>
         <S.Buttontext>Adicionar</S.Buttontext>
       </S.Button>
     </S.Container>
   );
 }
+
+export default memo(CardSearch);
