@@ -2,24 +2,22 @@ import React from "react";
 
 //Components
 import { StatusBar } from "expo-status-bar";
-import Layout from "./src/components/Layout";
-import Home from "./src/screens/main";
+import Routes from "./src/routes";
+import { NavigationContainer } from "@react-navigation/native";
 
 //Providers
 import SearchProvider from "./src/contexts/SearchContext";
-import FavoritesProvider from "./src/contexts/FavoritesContext";
+import HomeProvider from "./src/contexts/HomeContext";
 
 export default function App() {
   return (
-    <>
-      <FavoritesProvider>
+    <NavigationContainer>
+      <HomeProvider>
         <SearchProvider>
-          <Layout>
-            <StatusBar style="auto" />
-            <Home />
-          </Layout>
+          <StatusBar style="auto" />
+          <Routes />
         </SearchProvider>
-      </FavoritesProvider>
-    </>
+      </HomeProvider>
+    </NavigationContainer>
   );
 }

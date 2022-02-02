@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, memo, useState } from "react";
 import * as S from "./styles";
 import axios from "axios";
-import { APIkey } from "../../../../utils/constantes";
+import { APIkey } from "../../../utils/constantes";
+
+//Navigation
+import { useNavigation } from "@react-navigation/native";
 
 //context
-import { FavoritesContext } from "../../../contexts/FavoritesContext";
+import { HomeContext } from "../../../contexts/HomeContext";
 import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
@@ -14,10 +17,12 @@ type props = {
 import { ICidadesSearch } from "../../../interfaces/cidadeSearch.interface";
 import { IClima } from "../../../interfaces/clima.interface";
 
-function CardFavorito({ cidade }: props) {
-  const { favList, setFavlist } = useContext(FavoritesContext);
-  const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
+//components
+import { AntDesign } from "@expo/vector-icons";
 
+function CardFavorito({ cidade }: props) {
+  const { favList, setFavlist } = useContext(HomeContext);
+  const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
   const [clima, setClima] = useState<IClima>({
     coord: { lon: -47.6054, lat: -21.2067 },
     weather: [{ id: 804, main: "Clouds", description: "nublado", icon: "04d" }],
@@ -47,18 +52,26 @@ function CardFavorito({ cidade }: props) {
     cod: 200,
   });
 
+  //Navigation
+  const navigation = useNavigation();
+
+  //Move para a cidade selecionada
+  function moveToCity() {
+    navigation.navigate("Cidade" as never, { cidade: cidade } as never);
+  }
+
   useEffect(() => {
-    // axios
-    //   .get(
-    //     `http://api.openweathermap.org/data/2.5/weather?lat=${cidade.lat}&lon=${cidade.lon}&appid=${APIkey}&lang=pt_br&units=metric`
-    //   )
-    //   .then((res) => {
-    //     setClima(res.data);
-    //   });
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${cidade.lat}&lon=${cidade.lon}&appid=${APIkey}&lang=pt_br&units=metric`
+      )
+      .then((res) => {
+        setClima(res.data);
+      });
   }, []);
 
   return (
-    <S.Container>
+    <S.Container onPress={moveToCity}>
       <S.Left>
         <S.Name>{cidade.name}</S.Name>
         <S.Estado>{cidade.country}</S.Estado>
@@ -71,6 +84,7 @@ function CardFavorito({ cidade }: props) {
       </S.Left>
       <S.Right>
         <S.MainTemp>{clima.main.temp.toFixed()}&#176;</S.MainTemp>
+        <AntDesign name="heart" size={24} color="#ED0952" />
       </S.Right>
     </S.Container>
   );

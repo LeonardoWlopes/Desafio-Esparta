@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { colors } from "../../../styles/colors";
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   width: 328px;
   height: 130px;
   background-color: ${colors.cardColor};
@@ -32,7 +32,7 @@ export const Estado = styled.Text`
 `;
 
 export const Left = styled.View`
-  width: 50%;
+  width: 80%;
   height: 100%;
 `;
 
@@ -49,10 +49,10 @@ export const Clima = styled.Text`
   text-transform: capitalize;
 `;
 export const MinMax = styled.Text`
-  width: 51px;
+  width: auto;
   height: 16px;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
   font-style: normal;
   line-height: 16px;
@@ -61,9 +61,10 @@ export const MinMax = styled.Text`
 `;
 
 export const Right = styled.View`
-  width: 50%;
+  width: 20%;
   height: 100%;
   align-items: flex-end;
+  justify-content: space-between;
 `;
 
 export const MainTemp = styled.Text`
@@ -73,7 +74,6 @@ export const MainTemp = styled.Text`
   font-size: 34px;
   font-weight: normal;
   font-style: normal;
- 
-  
+
   color: ${colors.climaColor};
 `;

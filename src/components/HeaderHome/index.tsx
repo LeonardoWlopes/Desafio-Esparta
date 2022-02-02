@@ -6,13 +6,12 @@ import { colors } from "../../styles/colors";
 import { Octicons } from "@expo/vector-icons";
 import { SearchContext } from "../../contexts/SearchContext";
 
-
 //Interaces
 type props = {
   children: ReactNode;
 };
 
-export default function Layout({ children }: props) {
+export default function HeaderHome({ children }: props) {
   const { searchQuery, setSearchQuery, isSearchVisible, setIsSearchVisible } =
     useContext(SearchContext);
 

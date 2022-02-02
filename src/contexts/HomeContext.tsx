@@ -12,17 +12,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 type props = {
   children: ReactNode;
 };
-import { ICidadesSearch } from "../interfaces/cidadeSearch.interface";
 
-type IFavoritesContext = {
+type IHomeContext = {
   favList: ICidadesSearch[] | null;
   setFavlist: Dispatch<SetStateAction<ICidadesSearch[] | null>>;
 };
+import { ICidadesSearch } from "../interfaces/cidadeSearch.interface";
 
 //Context
-export const FavoritesContext = createContext({} as IFavoritesContext);
+export const HomeContext = createContext({} as IHomeContext);
 
-export default function FavoritesProvider({ children }: props) {
+export default function HomeProvider({ children }: props) {
   const [favList, setFavlist] = useState<ICidadesSearch[] | null>(null);
 
   //Salva a lista de favoritos no async storage
@@ -49,13 +49,13 @@ export default function FavoritesProvider({ children }: props) {
   }, []);
 
   return (
-    <FavoritesContext.Provider
+    <HomeContext.Provider
       value={{
         favList,
         setFavlist,
       }}
     >
       {children}
-    </FavoritesContext.Provider>
+    </HomeContext.Provider>
   );
 }

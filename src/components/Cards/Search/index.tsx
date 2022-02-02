@@ -2,7 +2,7 @@ import React, { useContext, useEffect, memo } from "react";
 import * as S from "./styles";
 
 //context
-import { FavoritesContext } from "../../../contexts/FavoritesContext";
+import { HomeContext } from "../../../contexts/HomeContext";
 import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
@@ -12,7 +12,7 @@ type props = {
 import { ICidadesSearch } from "../../../interfaces/cidadeSearch.interface";
 
 function CardSearch({ cidade }: props) {
-  const { favList, setFavlist } = useContext(FavoritesContext);
+  const { favList, setFavlist } = useContext(HomeContext);
   const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
 
   function addCityToFavotites() {
@@ -31,7 +31,7 @@ function CardSearch({ cidade }: props) {
   }
 
   return (
-    <S.Container>
+    <S.Container onPress={addCityToFavotites}>
       <S.Name>
         {cidade.name}, {cidade.state}
       </S.Name>

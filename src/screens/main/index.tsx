@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import { FlatList } from "react-native";
 import * as S from "./styles";
 
 //components
 import CardSearch from "../../components/Cards/Search";
 import CardFavorito from "../../components/Cards/Favorito";
+import { FlatList } from "react-native";
 
 //contexts
 import { SearchContext } from "../../contexts/SearchContext";
-import { FavoritesContext } from "../../contexts/FavoritesContext";
+import { HomeContext } from "../../contexts/HomeContext";
+import HeaderHome from "../../components/HeaderHome";
 
 export default function Home() {
   const { isSearchVisible, searchCidade } = useContext(SearchContext);
-  const { favList } = useContext(FavoritesContext);
+  const { favList } = useContext(HomeContext);
 
   //Lista a ser mostrada quando a barra de pesquisa esta ativada
   function SearchList() {
@@ -20,6 +21,7 @@ export default function Home() {
       <S.Container>
         <FlatList
           data={searchCidade}
+          scrollEnabled
           renderItem={({ item, index }) => <CardSearch cidade={item} />}
           keyExtractor={() => Math.random().toString()}
         />
@@ -42,6 +44,7 @@ export default function Home() {
       <S.Container>
         <FlatList
           data={favList}
+          scrollEnabled
           renderItem={({ item, index }) => <CardFavorito cidade={item} />}
           keyExtractor={() => Math.random().toString()}
         />
@@ -49,9 +52,7 @@ export default function Home() {
     );
   }
 
-  if (isSearchVisible && !!searchCidade) {
-    return <SearchList />;
-  } else {
-    return <HomeList />;
-  }
+  return (
+    <HeaderHome>{isSearchVisible ? <SearchList /> : <HomeList />}</HeaderHome>
+  );
 }
