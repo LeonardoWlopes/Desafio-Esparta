@@ -18,12 +18,14 @@ function CardSearch({ cidade }: props) {
   function addCityToFavorites() {
     const alreadyExists = favList?.findIndex((item) => item.lat === cidade.lat);
 
+    const newCidade = { ...cidade, favorited: false };
+
     if (!!favList) {
-      const newCarrinho = [...favList, cidade];
+      const newCarrinho = [...favList, newCidade];
 
       alreadyExists == -1 && setFavlist(newCarrinho);
     } else {
-      setFavlist([cidade]);
+      setFavlist([newCidade]);
     }
 
     setSearchQuery("");

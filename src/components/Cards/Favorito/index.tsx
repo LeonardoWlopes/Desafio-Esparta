@@ -8,7 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 
 //context
 import { HomeContext } from "../../../contexts/HomeContext";
-import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
 type props = {
@@ -21,10 +20,12 @@ import { IClima } from "../../../interfaces/clima.interface";
 import { AntDesign } from "@expo/vector-icons";
 import ModalExcluir from "../../ModalExcluir";
 import AppLoading from "expo-app-loading";
+import { TouchableOpacity } from "react-native";
 
 function CardFavorito({ cidade }: props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [clima, setClima] = useState<IClima | null>(null);
+  const { favList, setFavlist } = useContext(HomeContext);
 
   //Navigation
   const navigation = useNavigation();
@@ -34,6 +35,21 @@ function CardFavorito({ cidade }: props) {
     navigation.navigate("Cidade" as never, { cidade: cidade } as never);
   }
 
+  //Adiciona e remove a cidade como favorito
+  function addAndRemoveCityToFavorite() {
+    let newFavList: any = favList?.map((item) => {
+      if (item.lat === cidade.lat) {
+        let newItem = item;
+        newItem.favorited = !item.favorited;
+        return newItem;
+      } else {
+        return item;
+      }
+    });
+    !!newFavList && setFavlist(newFavList);
+  }
+
+  //Busca os dados da cidade na API
   useEffect(() => {
     axios
       .get(
@@ -43,7 +59,7 @@ function CardFavorito({ cidade }: props) {
         setClima(res.data);
       });
   }, []);
- 
+
   return (
     <S.Container onPress={moveToCity} onLongPress={() => setModalVisible(true)}>
       {!!clima ? (
@@ -60,16 +76,17 @@ function CardFavorito({ cidade }: props) {
           </S.Left>
           <S.Right>
             <S.MainTemp>{clima?.main.temp.toFixed()}&#176;</S.MainTemp>
-            <AntDesign
-              name="hearto"
-              size={24}
-              color="#ED0952"
-              onPress={() => console.log("re")}
-            />
+            <TouchableOpacity onPress={addAndRemoveCityToFavorite}>
+              <AntDesign
+                name={cidade.favorited ? "heart" : "hearto"}
+                size={24}
+                color="#ED0952"
+              />
+            </TouchableOpacity>
           </S.Right>
         </>
       ) : (
-        <AppLoading /> 
+        <AppLoading />
       )}
       <ModalExcluir
         modalVisible={modalVisible}

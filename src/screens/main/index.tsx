@@ -33,10 +33,13 @@ export default function Home() {
   //Lista padrão da home
   function HomeList() {
     if (!!favList && favList.length > 0) {
+      const renderList = favList.sort(function (a: any, b: any) {
+        return b.favorited - a.favorited;
+      });
       return (
         <S.Container>
           <FlatList
-            data={favList}
+            data={renderList}
             scrollEnabled
             renderItem={({ item, index }) => <CardFavorito cidade={item} />}
             contentContainerStyle={{ paddingBottom: 150 }}
