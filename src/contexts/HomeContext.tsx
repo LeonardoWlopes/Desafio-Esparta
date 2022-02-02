@@ -14,16 +14,16 @@ type props = {
 };
 
 type IHomeContext = {
-  favList: ICidadesSearch[] | null;
-  setFavlist: Dispatch<SetStateAction<ICidadesSearch[] | null>>;
+  favList: ICidades[] | null;
+  setFavlist: Dispatch<SetStateAction<ICidades[] | null>>;
 };
-import { ICidadesSearch } from "../interfaces/cidadeSearch.interface";
+import { ICidades } from "../interfaces/cidade.interface";
 
 //Context
 export const HomeContext = createContext({} as IHomeContext);
 
 export default function HomeProvider({ children }: props) {
-  const [favList, setFavlist] = useState<ICidadesSearch[] | null>(null);
+  const [favList, setFavlist] = useState<ICidades[] | null>(null);
 
   //Salva a lista de favoritos no async storage
   useEffect(() => {

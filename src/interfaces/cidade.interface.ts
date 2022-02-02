@@ -1,4 +1,4 @@
-export type ICidadesSearch = {
+export type ICidades = {
   country: "BR";
   lat: -21.2066883;
   lon: -47.6053774;

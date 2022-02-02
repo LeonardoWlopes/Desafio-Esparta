@@ -7,9 +7,9 @@ import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
 type props = {
-  cidade: ICidadesSearch;
+  cidade: ICidades;
 };
-import { ICidadesSearch } from "../../../interfaces/cidadeSearch.interface";
+import { ICidades } from "../../../interfaces/cidade.interface";
 
 function CardSearch({ cidade }: props) {
   const { favList, setFavlist } = useContext(HomeContext);

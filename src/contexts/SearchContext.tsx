@@ -13,15 +13,14 @@ import { APIkey } from "../utils/constantes";
 type props = {
   children: ReactNode;
 };
-import { ICidades } from "../interfaces/cidades.interface";
-import { ICidadesSearch } from "../interfaces/cidadeSearch.interface";
+import { ICidades } from "../interfaces/cidade.interface";
 
 type ISearchContex = {
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
   isSearchVisible: boolean;
   setIsSearchVisible: Dispatch<SetStateAction<boolean>>;
-  searchCidade: ICidadesSearch[] | null;
+  searchCidade: ICidades[] | null;
 };
 
 //Context
@@ -30,9 +29,7 @@ export const SearchContext = createContext({} as ISearchContex);
 export default function SearchProvider({ children }: props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [searchCidade, setSearchCidade] = useState<ICidadesSearch[] | null>(
-    null
-  );
+  const [searchCidade, setSearchCidade] = useState<ICidades[] | null>(null);
 
   //Busca as cordenadas da cidade
   useEffect(() => {
@@ -45,7 +42,6 @@ export default function SearchProvider({ children }: props) {
             let cidades = response.data;
             for (let i = 0; cidades.length < i; i++) {
               cidades[i].favorited = false;
-              console.log(cidades[i]);
             }
             setSearchCidade(cidades);
           })

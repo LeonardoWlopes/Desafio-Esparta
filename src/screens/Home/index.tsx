@@ -5,11 +5,11 @@ import * as S from "./styles";
 import CardSearch from "../../components/Cards/Search";
 import CardFavorito from "../../components/Cards/Favorito";
 import { FlatList } from "react-native";
+import HeaderHome from "../../components/HeaderHome";
 
 //contexts
 import { SearchContext } from "../../contexts/SearchContext";
 import { HomeContext } from "../../contexts/HomeContext";
-import HeaderHome from "../../components/HeaderHome";
 
 export default function Home() {
   const { isSearchVisible, searchCidade } = useContext(SearchContext);
@@ -31,25 +31,29 @@ export default function Home() {
 
   //Lista padrão da home
   function HomeList() {
-    return !favList ? (
-      <S.Container>
-        <S.HomeTitle>
-          Parece que você ainda não adicionou uma cidade
-        </S.HomeTitle>
-        <S.HomeSubTitle>
-          Tente adicionar uma cidade usando o botão de busca
-        </S.HomeSubTitle>
-      </S.Container>
-    ) : (
-      <S.Container>
-        <FlatList
-          data={favList}
-          scrollEnabled
-          renderItem={({ item, index }) => <CardFavorito cidade={item} />}
-          keyExtractor={() => Math.random().toString()}
-        />
-      </S.Container>
-    );
+    if (!!favList && favList.length > 0) {
+      return (
+        <S.Container>
+          <FlatList
+            data={favList}
+            scrollEnabled
+            renderItem={({ item, index }) => <CardFavorito cidade={item} />}
+            keyExtractor={() => Math.random().toString()}
+          />
+        </S.Container>
+      );
+    } else {
+      return (
+        <S.Container>
+          <S.HomeTitle>
+            Parece que você ainda não adicionou uma cidade
+          </S.HomeTitle>
+          <S.HomeSubTitle>
+            Tente adicionar uma cidade usando o botão de busca
+          </S.HomeSubTitle>
+        </S.Container>
+      );
+    }
   }
 
   return (

@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { colors } from "../../../styles/colors";
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.View`
   width: 328px;
   height: 130px;
   background-color: ${colors.cardColor};
@@ -20,6 +20,7 @@ export const Name = styled.Text`
   font-size: 24px;
   font-weight: 500;
   font-style: normal;
+  text-transform: capitalize;
 `;
 
 export const Estado = styled.Text`
@@ -48,7 +49,6 @@ export const Clima = styled.Text`
   color: ${colors.climaColor};
   text-transform: capitalize;
   margin-bottom: 4px;
-
 `;
 export const MinMax = styled.Text`
   width: auto;

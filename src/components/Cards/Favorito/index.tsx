@@ -12,45 +12,19 @@ import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
 type props = {
-  cidade: ICidadesSearch;
+  cidade: ICidades;
 };
-import { ICidadesSearch } from "../../../interfaces/cidadeSearch.interface";
+import { ICidades } from "../../../interfaces/cidade.interface";
 import { IClima } from "../../../interfaces/clima.interface";
 
 //components
 import { AntDesign } from "@expo/vector-icons";
+import ModalExcluir from "../../ModalExcluir";
+import AppLoading from "expo-app-loading";
 
 function CardFavorito({ cidade }: props) {
-  const { favList, setFavlist } = useContext(HomeContext);
-  const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
-  const [clima, setClima] = useState<IClima>({
-    coord: { lon: -47.6054, lat: -21.2067 },
-    weather: [{ id: 804, main: "Clouds", description: "nublado", icon: "04d" }],
-    base: "stations",
-    main: {
-      temp: 25.79,
-      feels_like: 26.33,
-      temp_min: 25.79,
-      temp_max: 25.79,
-      pressure: 1013,
-      humidity: 73,
-    },
-    visibility: 10000,
-    wind: { speed: 2.57, deg: 270 },
-    clouds: { all: 100 },
-    dt: 1643743427,
-    sys: {
-      type: 1,
-      id: 8428,
-      country: "BR",
-      sunrise: 1643705569,
-      sunset: 1643752505,
-    },
-    timezone: -10800,
-    id: 3447720,
-    name: "Serrana",
-    cod: 200,
-  });
+  const [modalVisible, setModalVisible] = useState(false);
+  const [clima, setClima] = useState<IClima | null>(null);
 
   //Navigation
   const navigation = useNavigation();
@@ -71,21 +45,32 @@ function CardFavorito({ cidade }: props) {
   }, []);
 
   return (
-    <S.Container onPress={moveToCity}>
-      <S.Left>
-        <S.Name>{cidade.name}</S.Name>
-        <S.Estado>{cidade.country}</S.Estado>
+    <S.Container onPress={moveToCity} onLongPress={() => setModalVisible(true)}>
+      {!!clima ? (
+        <>
+          <S.Left>
+            <S.Name>{cidade.name}</S.Name>
+            <S.Estado>{cidade.country}</S.Estado>
 
-        <S.Clima>{clima.weather[0].description}</S.Clima>
-        <S.MinMax>
-          {clima.main.temp_min.toFixed()}&#176; -{" "}
-          {clima.main.temp_max.toFixed()}&#176;
-        </S.MinMax>
-      </S.Left>
-      <S.Right>
-        <S.MainTemp>{clima.main.temp.toFixed()}&#176;</S.MainTemp>
-        <AntDesign name="heart" size={24} color="#ED0952" />
-      </S.Right>
+            <S.Clima>{clima?.weather[0].description}</S.Clima>
+            <S.MinMax>
+              {clima?.main.temp_min.toFixed()}&#176; -{" "}
+              {clima?.main.temp_max.toFixed()}&#176;
+            </S.MinMax>
+          </S.Left>
+          <S.Right>
+            <S.MainTemp>{clima?.main.temp.toFixed()}&#176;</S.MainTemp>
+            <AntDesign name="heart" size={24} color="#ED0952" />
+          </S.Right>
+        </>
+      ) : (
+        <AppLoading />
+      )}
+      <ModalExcluir
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        lat={cidade.lat}
+      />
     </S.Container>
   );
 }
