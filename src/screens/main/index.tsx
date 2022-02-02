@@ -45,6 +45,7 @@ export default function Home() {
             contentContainerStyle={{ paddingBottom: 150 }}
             keyExtractor={() => Math.random().toString()}
           />
+          
         </S.Container>
       );
     } else {

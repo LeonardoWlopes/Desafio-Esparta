@@ -30,9 +30,7 @@ export default function HomeProvider({ children }: props) {
     !!favList &&
       (async () => {
         const jsonValue = JSON.stringify(favList);
-        await AsyncStorage.setItem("@Sparta_FavList", jsonValue).then(() =>
-          console.log("Salvo no storage")
-        );
+        await AsyncStorage.setItem("@Sparta_FavList", jsonValue)
       })();
   }, [favList]);
 
@@ -43,7 +41,6 @@ export default function HomeProvider({ children }: props) {
 
       if (!!jsonValue) {
         setFavlist(JSON.parse(jsonValue));
-        console.log("Lista Carregada");
       }
     })();
   }, []);

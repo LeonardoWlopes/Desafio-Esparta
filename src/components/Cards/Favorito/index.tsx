@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 
 //context
 import { HomeContext } from "../../../contexts/HomeContext";
+import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
 type props = {
@@ -26,6 +27,7 @@ function CardFavorito({ cidade }: props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [clima, setClima] = useState<IClima | null>(null);
   const { favList, setFavlist } = useContext(HomeContext);
+  const { language } = useContext(SearchContext);
 
   //Navigation
   const navigation = useNavigation();
@@ -53,7 +55,11 @@ function CardFavorito({ cidade }: props) {
   useEffect(() => {
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${cidade.lat}&lon=${cidade.lon}&appid=${APIkey}&lang=pt_br&units=metric`
+        `http://api.openweathermap.org/data/2.5/weather?lat=${cidade.lat}&lon=${
+          cidade.lon
+        }&appid=${APIkey}&lang=${language === "pt-br" ? "pt_br" : "en"}${
+          language === "pt-br" && "&units=metric"
+        }`
       )
       .then((res) => {
         setClima(res.data);

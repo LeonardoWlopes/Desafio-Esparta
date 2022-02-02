@@ -9,8 +9,8 @@ export const Container = styled.View`
 `;
 
 export const SubTitle = styled.Text`
-  width: 190px;
-  height: 16px;
+  width: auto;
+  height: auto;
   font-family: Roboto;
   font-size: 14px;
   font-weight: normal;

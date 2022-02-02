@@ -5,6 +5,7 @@ import { colors } from "../../styles/colors";
 //components
 import { Octicons } from "@expo/vector-icons";
 import { SearchContext } from "../../contexts/SearchContext";
+import { TouchableOpacity } from "react-native";
 
 //Interaces
 type props = {
@@ -12,8 +13,24 @@ type props = {
 };
 
 export default function HeaderHome({ children }: props) {
-  const { searchQuery, setSearchQuery, isSearchVisible, setIsSearchVisible } =
-    useContext(SearchContext);
+  const {
+    searchQuery,
+    setSearchQuery,
+    isSearchVisible,
+    setIsSearchVisible,
+    language,
+    setLanguage,
+  } = useContext(SearchContext);
+
+  //Muda a unidade de medida
+  function handleChangeLanguage() {
+    if (language === "pt-br") {
+      setLanguage("en");
+    }
+    if (language === "en") {
+      setLanguage("pt-br");
+    }
+  }
 
   return (
     <>
@@ -29,7 +46,16 @@ export default function HeaderHome({ children }: props) {
           />
         )}
         {!isSearchVisible ? (
-          <S.Title>Cidades</S.Title>
+          <>
+            <S.Title>Cidades</S.Title>
+            <TouchableOpacity onPress={handleChangeLanguage}>
+              {language === "pt-br" ? (
+                <S.Flag source={require("../../assets/brasil.png")} />
+              ) : (
+                <S.Flag source={require("../../assets/usa.png")} />
+              )}
+            </TouchableOpacity>
+          </>
         ) : (
           <S.Search
             onChangeText={setSearchQuery}

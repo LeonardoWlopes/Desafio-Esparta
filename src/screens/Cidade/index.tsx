@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as S from "./styles";
 import axios from "axios";
 import { APIkey } from "../../utils/constantes";
@@ -10,6 +10,7 @@ import CardForecast from "../../components/Cards/Forecast";
 
 //interfaces
 import { ICidades } from "../../interfaces/cidade.interface";
+import { SearchContext } from "../../contexts/SearchContext";
 
 type props = {
   route: any;
@@ -17,15 +18,18 @@ type props = {
 
 export default function Cidade({ route }: props) {
   const [climas, setClimas] = useState<IForecast | null>(null);
+  const { language } = useContext(SearchContext);
 
   const cidade: ICidades = route.params.cidade;
-
-  console.log("Proximos 5 dias de", cidade.name);
 
   useEffect(() => {
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${cidade.lat}&lon=${cidade.lon}&appid=${APIkey}&lang=pt_br&units=metric`
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${
+          cidade.lat
+        }&lon=${cidade.lon}&appid=${APIkey}&lang=${
+          language === "pt-br" ? "pt_br" : "en"
+        }${language === "pt-br" && "&units=metric"}`
       )
       .then((res) => {
         setClimas(res.data);

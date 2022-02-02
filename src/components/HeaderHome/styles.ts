@@ -31,3 +31,8 @@ export const Search = styled.TextInput`
   color: ${colors.HeaderColor};
   width: 80%;
 `;
+
+export const Flag = styled.Image`
+  width: 35px;
+  height: 35px;
+`;

@@ -21,6 +21,8 @@ type ISearchContext = {
   isSearchVisible: boolean;
   setIsSearchVisible: Dispatch<SetStateAction<boolean>>;
   searchCidade: ICidades[] | null;
+  setLanguage: Dispatch<SetStateAction<string>>;
+  language: string;
 };
 
 //Context
@@ -30,6 +32,7 @@ export default function SearchProvider({ children }: props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchCidade, setSearchCidade] = useState<ICidades[] | null>(null);
+  const [language, setLanguage] = useState("pt-br");
 
   //Busca as coordenadas da cidade
   useEffect(() => {
@@ -51,6 +54,8 @@ export default function SearchProvider({ children }: props) {
   return (
     <SearchContext.Provider
       value={{
+        language,
+        setLanguage,
         searchQuery,
         setSearchQuery,
         isSearchVisible,
