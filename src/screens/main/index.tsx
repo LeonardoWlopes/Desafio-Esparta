@@ -23,6 +23,7 @@ export default function Home() {
           data={searchCidade}
           scrollEnabled
           renderItem={({ item, index }) => <CardSearch cidade={item} />}
+          contentContainerStyle={{ paddingBottom: 150 }}
           keyExtractor={() => Math.random().toString()}
         />
       </S.Container>
@@ -38,6 +39,7 @@ export default function Home() {
             data={favList}
             scrollEnabled
             renderItem={({ item, index }) => <CardFavorito cidade={item} />}
+            contentContainerStyle={{ paddingBottom: 150 }}
             keyExtractor={() => Math.random().toString()}
           />
         </S.Container>

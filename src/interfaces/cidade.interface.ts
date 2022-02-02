@@ -1,8 +1,8 @@
 export type ICidades = {
-  country: "BR";
-  lat: -21.2066883;
-  lon: -47.6053774;
-  name: "Serrana";
-  state: "São Paulo";
-  favorited: boolean;
+  country: string
+  lat: number
+  lon: number
+  name: string
+  state: string
+  favorited?: boolean;
 };

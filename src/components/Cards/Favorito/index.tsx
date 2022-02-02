@@ -43,7 +43,7 @@ function CardFavorito({ cidade }: props) {
         setClima(res.data);
       });
   }, []);
-
+ 
   return (
     <S.Container onPress={moveToCity} onLongPress={() => setModalVisible(true)}>
       {!!clima ? (
@@ -60,11 +60,16 @@ function CardFavorito({ cidade }: props) {
           </S.Left>
           <S.Right>
             <S.MainTemp>{clima?.main.temp.toFixed()}&#176;</S.MainTemp>
-            <AntDesign name="heart" size={24} color="#ED0952" />
+            <AntDesign
+              name="hearto"
+              size={24}
+              color="#ED0952"
+              onPress={() => console.log("re")}
+            />
           </S.Right>
         </>
       ) : (
-        <AppLoading />
+        <AppLoading /> 
       )}
       <ModalExcluir
         modalVisible={modalVisible}

@@ -6,7 +6,6 @@ export const Container = styled.View`
   height: 100%;
   background-color: ${colors.backgroundColor};
   align-items: center;
-  padding-bottom: 150px;
 `;
 
 export const SubTitle = styled.Text`

@@ -59,6 +59,7 @@ export default function Cidade({ route }: props) {
           renderItem={({ item, index }) => (
             <CardForecast data={item} index={index} />
           )}
+          contentContainerStyle={{ paddingBottom: 150 }}
           keyExtractor={() => Math.random().toString()}
         />
       </S.Container>

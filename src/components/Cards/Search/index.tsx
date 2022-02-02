@@ -15,7 +15,7 @@ function CardSearch({ cidade }: props) {
   const { favList, setFavlist } = useContext(HomeContext);
   const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
 
-  function addCityToFavotites() {
+  function addCityToFavorites() {
     const alreadyExists = favList?.findIndex((item) => item.lat === cidade.lat);
 
     if (!!favList) {
@@ -27,17 +27,17 @@ function CardSearch({ cidade }: props) {
     }
 
     setSearchQuery("");
-    setIsSearchVisible(false);
+    setTimeout(() => setIsSearchVisible(false), 200);
   }
 
   return (
-    <S.Container onPress={addCityToFavotites}>
+    <S.Container onPress={addCityToFavorites}>
       <S.Name>
         {cidade.name}, {cidade.state}
       </S.Name>
       <S.Estado>{cidade.country}</S.Estado>
 
-      <S.Button onPress={addCityToFavotites}>
+      <S.Button onPress={addCityToFavorites}>
         <S.Buttontext>Adicionar</S.Buttontext>
       </S.Button>
     </S.Container>

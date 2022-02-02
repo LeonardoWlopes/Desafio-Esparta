@@ -15,7 +15,7 @@ type props = {
 };
 import { ICidades } from "../interfaces/cidade.interface";
 
-type ISearchContex = {
+type ISearchContext = {
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
   isSearchVisible: boolean;
@@ -24,14 +24,14 @@ type ISearchContex = {
 };
 
 //Context
-export const SearchContext = createContext({} as ISearchContex);
+export const SearchContext = createContext({} as ISearchContext);
 
 export default function SearchProvider({ children }: props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchCidade, setSearchCidade] = useState<ICidades[] | null>(null);
 
-  //Busca as cordenadas da cidade
+  //Busca as coordenadas da cidade
   useEffect(() => {
     searchQuery.length >= 3
       ? axios

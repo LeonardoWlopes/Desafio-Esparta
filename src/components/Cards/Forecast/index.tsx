@@ -8,8 +8,7 @@ type props = {
 };
 
 function CardForecast({ data, index }: props) {
-  //Array com os nomes dos dias
-  var dayName = [
+  const dayNames = [
     "Domingo",
     "Segunda-Feira",
     "Terça-Feira",
@@ -20,8 +19,7 @@ function CardForecast({ data, index }: props) {
     "Domingo",
   ];
 
-  //Array com os nomes dos messes
-  const monName = [
+  const monNames = [
     "janeiro",
     "fevereiro",
     "março",
@@ -45,13 +43,13 @@ function CardForecast({ data, index }: props) {
       <S.Left>
         <S.Name>
           {index > 1
-            ? dayName[new Date(stringToDate).getDay()+1]
+            ? dayNames[new Date(stringToDate).getDay() + 1]
             : hojeAmanha[index]}
         </S.Name>
 
         <S.Estado>
           {data.dt_txt.substring(8, 10)} de {""}
-          {monName[new Date(stringToDate).getMonth()]}
+          {monNames[new Date(stringToDate).getMonth()]}
         </S.Estado>
 
         <S.Clima>{data.weather[0].description}</S.Clima>

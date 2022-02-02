@@ -6,7 +6,6 @@ export const Container = styled.View`
   height: 100%;
   background-color: ${colors.backgroundColor};
   align-items: center;
-  padding-bottom: 150px;
 `;
 
 export const HomeTitle = styled.Text`
@@ -22,7 +21,8 @@ export const HomeTitle = styled.Text`
 `;
 
 export const HomeSubTitle = styled.Text`
-  width: 328px;
+  width: auto;
+  padding: 0px 8px;
   height: 48px;
   font-family: "Roboto";
   font-size: 16px;
