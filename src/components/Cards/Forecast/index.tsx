@@ -1,5 +1,8 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import * as S from "./styles";
+
+//contexts
+import { SearchContext } from "../../../contexts/SearchContext";
 
 //Interfaces
 type props = {
@@ -8,32 +11,67 @@ type props = {
 };
 
 function CardForecast({ data, index }: props) {
-  const dayNames = [
-    "Domingo",
-    "Segunda-Feira",
-    "Terça-Feira",
-    "Quarta-Feira",
-    "Quinta-Feira",
-    "Sexta-Feira",
-    "Sábado",
-    "Domingo",
-  ];
+  const { language } = useContext(SearchContext);
 
-  const monNames = [
-    "janeiro",
-    "fevereiro",
-    "março",
-    "abril",
-    "Maio",
-    "junho",
-    "agosto",
-    "outubro",
-    "novembro",
-    "dezembro",
-  ];
+  var dayNames: any = [];
+  var todayTomorrow: any = [];
+  var monNames: any = [];
 
-  //Array para hoje e amanha
-  const hojeAmanha = ["Hoje", "Amanha"];
+  if (language === "pt-br") {
+    dayNames = [
+      "Domingo",
+      "Segunda-Feira",
+      "Terça-Feira",
+      "Quarta-Feira",
+      "Quinta-Feira",
+      "Sexta-Feira",
+      "Sábado",
+      "Domingo",
+    ];
+
+    monNames = [
+      "janeiro",
+      "fevereiro",
+      "março",
+      "abril",
+      "Maio",
+      "junho",
+      "Julho",
+      "agosto",
+      "Setembro",
+      "outubro",
+      "novembro",
+      "dezembro",
+    ];
+    todayTomorrow = ["Hoje", "Amanha"];
+  } else {
+    dayNames = [
+      "Domingo",
+      "Segunda-Feira",
+      "Terça-Feira",
+      "Quarta-Feira",
+      "Quinta-Feira",
+      "Sexta-Feira",
+      "Sábado",
+      "Domingo",
+    ];
+
+    monNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    todayTomorrow = ["Today", "Tomorrow"];
+  }
 
   //passa a data de string para timestamp
   const stringToDate = Date.parse(data.dt_txt.substring(0, 10));
@@ -44,13 +82,20 @@ function CardForecast({ data, index }: props) {
         <S.Name>
           {index > 1
             ? dayNames[new Date(stringToDate).getDay() + 1]
-            : hojeAmanha[index]}
+            : todayTomorrow[index]}
         </S.Name>
 
-        <S.Estado>
-          {data.dt_txt.substring(8, 10)} de {""}
-          {monNames[new Date(stringToDate).getMonth()]}
-        </S.Estado>
+        {language === "pt-br" ? (
+          <S.Estado>
+            {data.dt_txt.substring(8, 10)} de {""}
+            {monNames[new Date(stringToDate).getMonth()]}
+          </S.Estado>
+        ) : (
+          <S.Estado>
+            {monNames[new Date(stringToDate).getMonth()]} {""}
+            {data.dt_txt.substring(8, 10)}
+          </S.Estado>
+        )}
 
         <S.Clima>{data.weather[0].description}</S.Clima>
         <S.MinMax>
