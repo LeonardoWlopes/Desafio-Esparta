@@ -5,7 +5,7 @@ import { colors } from "../../styles/colors";
 //components
 import { Octicons } from "@expo/vector-icons";
 import { SearchContext } from "../../contexts/SearchContext";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 //Interaces
 type props = {
@@ -46,16 +46,7 @@ export default function HeaderHome({ children }: props) {
           />
         )}
         {!isSearchVisible ? (
-          <>
-            <S.Title>Cidades</S.Title>
-            <TouchableOpacity onPress={handleChangeLanguage}>
-              {language === "pt-br" ? (
-                <S.Flag source={require("../../assets/brasil.png")} />
-              ) : (
-                <S.Flag source={require("../../assets/usa.png")} />
-              )}
-            </TouchableOpacity>
-          </>
+          <S.Title>{language === "pt-br" ? "Cidades" : "Cities"}</S.Title>
         ) : (
           <S.Search
             onChangeText={setSearchQuery}
@@ -66,12 +57,23 @@ export default function HeaderHome({ children }: props) {
           />
         )}
         {!isSearchVisible && (
-          <Octicons
-            name="search"
-            size={24}
-            color={colors.HeaderColor}
-            onPress={() => setIsSearchVisible(!isSearchVisible)}
-          />
+          <>
+            <S.SearchContainer>
+              <TouchableOpacity onPress={handleChangeLanguage}>
+                {language === "pt-br" ? (
+                  <S.Flag source={require("../../assets/brasil.png")} />
+                ) : (
+                  <S.Flag source={require("../../assets/usa.png")} />
+                )}
+              </TouchableOpacity>
+              <Octicons
+                name="search"
+                size={24}
+                color={colors.HeaderColor}
+                onPress={() => setIsSearchVisible(!isSearchVisible)}
+              />
+            </S.SearchContainer>
+          </>
         )}
       </S.Header>
       {children}

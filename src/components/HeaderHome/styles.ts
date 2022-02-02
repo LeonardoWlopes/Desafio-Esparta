@@ -15,7 +15,7 @@ export const Header = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 16px;
+  padding: 0px 40px;
   display: flex;
   flex-direction: row;
 `;
@@ -35,4 +35,11 @@ export const Search = styled.TextInput`
 export const Flag = styled.Image`
   width: 35px;
   height: 35px;
+`;
+
+export const SearchContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80px;
 `;
