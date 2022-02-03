@@ -33,7 +33,7 @@ export const Estado = styled.Text`
 `;
 
 export const Left = styled.View`
-  width: 80%;
+  width: 70%;
   height: 100%;
 `;
 
@@ -63,7 +63,7 @@ export const MinMax = styled.Text`
 `;
 
 export const Right = styled.View`
-  width: 20%;
+  width: 30%;
   height: 100%;
   align-items: flex-end;
   justify-content: space-between;

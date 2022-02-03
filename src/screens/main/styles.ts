@@ -23,7 +23,7 @@ export const HomeTitle = styled.Text`
 export const HomeSubTitle = styled.Text`
   width: auto;
   padding: 0px 8px;
-  height: 48px;
+  height: auto;
   font-family: "Roboto";
   font-size: 16px;
   font-weight: normal;
@@ -33,5 +33,4 @@ export const HomeSubTitle = styled.Text`
   text-align: center;
   color: rgba(0, 0, 0, 0.6);
   margin: 12px auto 16px auto;
-
 `;

@@ -32,13 +32,13 @@ export const Estado = styled.Text`
 `;
 
 export const Left = styled.View`
-  width: 80%;
+  width: 70%;
   height: 100%;
 `;
 
 export const Clima = styled.Text`
   width: auto;
-  height: 20px;
+  height: auto;
   font-family: Roboto;
   font-size: 14px;
   font-weight: normal;
@@ -63,7 +63,7 @@ export const MinMax = styled.Text`
 `;
 
 export const Right = styled.View`
-  width: 20%;
+  width: 30%;
   height: 100%;
   align-items: flex-end;
   justify-content: space-between;
@@ -71,7 +71,7 @@ export const Right = styled.View`
 
 export const MainTemp = styled.Text`
   width: auto;
-  height: 40px;
+  height: auto;
   font-family: Roboto;
   font-size: 34px;
   font-weight: normal;

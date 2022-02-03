@@ -46,14 +46,14 @@ function CardForecast({ data, index }: props) {
     todayTomorrow = ["Hoje", "Amanha"];
   } else {
     dayNames = [
-      "Domingo",
-      "Segunda-Feira",
-      "Terça-Feira",
-      "Quarta-Feira",
-      "Quinta-Feira",
-      "Sexta-Feira",
-      "Sábado",
-      "Domingo",
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
     ];
 
     monNames = [
