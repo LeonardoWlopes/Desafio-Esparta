@@ -42,11 +42,7 @@ export default function SearchProvider({ children }: props) {
             `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=4&appid=${APIkey}`
           )
           .then((response) => {
-            let cidades = response.data;
-            for (let i = 0; cidades.length < i; i++) {
-              cidades[i].favorited = false;
-            }
-            setSearchCidade(cidades);
+            setSearchCidade(response.data);
           })
       : setSearchCidade(null);
   }, [searchQuery]);

@@ -22,6 +22,7 @@ export default function Cidade({ route }: props) {
 
   const cidade: ICidades = route.params.cidade;
 
+  //Busca na API as informações da cidade
   useEffect(() => {
     axios
       .get(
@@ -36,6 +37,7 @@ export default function Cidade({ route }: props) {
       });
   }, []);
 
+  //Gera a renderList
   function gerarRenderList() {
     if (!!climas) {
       const renderList: IDias[] = [];

@@ -15,5 +15,8 @@ Um app que mostra as informações sobre o clima das cidades selecionadas.
 ### OUTRAS INFORMAÇÕES
 - O aplicativo foi desenvolvido totalmente em um emulador de Pixel4 com um display de 1080x2280. <br>
 - As informações se mantem entre as sessões. <br>
+- A opção de mudar a linguagem não abrange todo o aplicativo, apenas as partes mais essenciais. <br>
+
+	 
 
 

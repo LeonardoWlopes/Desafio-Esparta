@@ -22,7 +22,7 @@ export default function HeaderHome({ children }: props) {
     setLanguage,
   } = useContext(SearchContext);
 
-  //Muda a unidade de medida
+  //Muda a unidade de medida e a linguagem
   function handleChangeLanguage() {
     if (language === "pt-br") {
       setLanguage("en");
@@ -35,7 +35,6 @@ export default function HeaderHome({ children }: props) {
   return (
     <>
       <S.StatusBar />
-
       <S.Header>
         {isSearchVisible && (
           <Octicons

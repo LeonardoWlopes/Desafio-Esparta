@@ -16,11 +16,12 @@ export default function ModalExcluir({
   setModalVisible,
   lat,
 }: props) {
-  const { favList, setFavlist } = useContext(HomeContext);
+  const { homeList, setHomeList } = useContext(HomeContext);
 
+  //Remove um item da lista home
   function handleRemoveItem() {
-    const newFavList = favList?.filter((item) => item.lat !== lat);
-    !!newFavList && setFavlist(newFavList);
+    const newFavList = homeList?.filter((item) => item.lat !== lat);
+    !!newFavList && setHomeList(newFavList);
   }
 
   return (

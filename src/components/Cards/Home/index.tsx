@@ -23,10 +23,10 @@ import ModalExcluir from "../../ModalExcluir";
 import AppLoading from "expo-app-loading";
 import { TouchableOpacity } from "react-native";
 
-function CardFavorito({ cidade }: props) {
+function CardHome({ cidade }: props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [clima, setClima] = useState<IClima | null>(null);
-  const { favList, setFavlist } = useContext(HomeContext);
+  const { homeList, setHomeList } = useContext(HomeContext);
   const { language } = useContext(SearchContext);
 
   //Navigation
@@ -39,7 +39,7 @@ function CardFavorito({ cidade }: props) {
 
   //Adiciona e remove a cidade como favorito
   function addAndRemoveCityToFavorite() {
-    let newFavList: any = favList?.map((item) => {
+    let newFavList: any = homeList?.map((item) => {
       if (item.lat === cidade.lat) {
         let newItem = item;
         newItem.favorited = !item.favorited;
@@ -48,7 +48,7 @@ function CardFavorito({ cidade }: props) {
         return item;
       }
     });
-    !!newFavList && setFavlist(newFavList);
+    !!newFavList && setHomeList(newFavList);
   }
 
   //Busca os dados da cidade na API
@@ -103,4 +103,4 @@ function CardFavorito({ cidade }: props) {
   );
 }
 
-export default memo(CardFavorito);
+export default memo(CardHome);

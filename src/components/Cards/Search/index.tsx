@@ -12,20 +12,23 @@ type props = {
 import { ICidades } from "../../../interfaces/cidade.interface";
 
 function CardSearch({ cidade }: props) {
-  const { favList, setFavlist } = useContext(HomeContext);
+  const { homeList, setHomeList } = useContext(HomeContext);
   const { setSearchQuery, setIsSearchVisible } = useContext(SearchContext);
 
-  function addCityToFavorites() {
-    const alreadyExists = favList?.findIndex((item) => item.lat === cidade.lat);
+  //Adiciona uma cidade para a lista da home
+  function addCityToHomeList() {
+    const alreadyExists = homeList?.findIndex(
+      (item) => item.lat === cidade.lat
+    );
 
     const newCidade = { ...cidade, favorited: false };
 
-    if (!!favList) {
-      const newCarrinho = [...favList, newCidade];
+    if (!!homeList) {
+      const newCarrinho = [...homeList, newCidade];
 
-      alreadyExists == -1 && setFavlist(newCarrinho);
+      alreadyExists == -1 && setHomeList(newCarrinho);
     } else {
-      setFavlist([newCidade]);
+      setHomeList([newCidade]);
     }
 
     setSearchQuery("");
@@ -33,13 +36,13 @@ function CardSearch({ cidade }: props) {
   }
 
   return (
-    <S.Container onPress={addCityToFavorites}>
+    <S.Container onPress={addCityToHomeList}>
       <S.Name>
         {cidade.name}, {cidade.state}
       </S.Name>
       <S.Estado>{cidade.country}</S.Estado>
 
-      <S.Button onPress={addCityToFavorites}>
+      <S.Button onPress={addCityToHomeList}>
         <S.Buttontext>Adicionar</S.Buttontext>
       </S.Button>
     </S.Container>

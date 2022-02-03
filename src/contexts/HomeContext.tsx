@@ -14,8 +14,8 @@ type props = {
 };
 
 type IHomeContext = {
-  favList: ICidades[] | null;
-  setFavlist: Dispatch<SetStateAction<ICidades[] | null>>;
+  homeList: ICidades[] | null;
+  setHomeList: Dispatch<SetStateAction<ICidades[] | null>>;
 };
 import { ICidades } from "../interfaces/cidade.interface";
 
@@ -23,16 +23,16 @@ import { ICidades } from "../interfaces/cidade.interface";
 export const HomeContext = createContext({} as IHomeContext);
 
 export default function HomeProvider({ children }: props) {
-  const [favList, setFavlist] = useState<ICidades[] | null>(null);
+  const [homeList, setHomeList] = useState<ICidades[] | null>(null);
 
   //Salva a lista de favoritos no async storage
   useEffect(() => {
-    !!favList &&
+    !!homeList &&
       (async () => {
-        const jsonValue = JSON.stringify(favList);
-        await AsyncStorage.setItem("@Sparta_FavList", jsonValue)
+        const jsonValue = JSON.stringify(homeList);
+        await AsyncStorage.setItem("@Sparta_FavList", jsonValue);
       })();
-  }, [favList]);
+  }, [homeList]);
 
   //Retorna a lista salva em memoria
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function HomeProvider({ children }: props) {
       const jsonValue = await AsyncStorage.getItem("@Sparta_FavList");
 
       if (!!jsonValue) {
-        setFavlist(JSON.parse(jsonValue));
+        setHomeList(JSON.parse(jsonValue));
       }
     })();
   }, []);
@@ -48,8 +48,8 @@ export default function HomeProvider({ children }: props) {
   return (
     <HomeContext.Provider
       value={{
-        favList,
-        setFavlist,
+        homeList,
+        setHomeList,
       }}
     >
       {children}

@@ -12,8 +12,6 @@ type props = {
   nome: string;
 };
 
-//navigation
-
 export default function HeaderCity({ children, nome }: props) {
   //Volta para tela Home
   const navigation = useNavigation();

@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 //components
 import CardSearch from "../../components/Cards/Search";
-import CardFavorito from "../../components/Cards/Favorito";
+import CardHome from "../../components/Cards/Home";
 import { FlatList } from "react-native";
 import HeaderHome from "../../components/HeaderHome";
 
@@ -13,7 +13,7 @@ import { HomeContext } from "../../contexts/HomeContext";
 
 export default function Home() {
   const { isSearchVisible, searchCidade } = useContext(SearchContext);
-  const { favList } = useContext(HomeContext);
+  const { homeList } = useContext(HomeContext);
 
   //Lista a ser mostrada quando a barra de pesquisa esta ativada
   function SearchList() {
@@ -32,8 +32,8 @@ export default function Home() {
 
   //Lista padrão da home
   function HomeList() {
-    if (!!favList && favList.length > 0) {
-      const renderList = favList.sort(function (a: any, b: any) {
+    if (!!homeList && homeList.length > 0) {
+      const renderList = homeList.sort(function (a: any, b: any) {
         return b.favorited - a.favorited;
       });
       return (
@@ -41,11 +41,10 @@ export default function Home() {
           <FlatList
             data={renderList}
             scrollEnabled
-            renderItem={({ item, index }) => <CardFavorito cidade={item} />}
+            renderItem={({ item, index }) => <CardHome cidade={item} />}
             contentContainerStyle={{ paddingBottom: 150 }}
             keyExtractor={() => Math.random().toString()}
           />
-          
         </S.Container>
       );
     } else {
